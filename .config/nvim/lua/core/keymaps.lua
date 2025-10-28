@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 local vks = vim.keymap.set
 
@@ -7,7 +8,10 @@ vks("n", "<leader>ww", ":write<CR>", { desc = "Write document" })
 vks("n", "<leader>qq", ":q!<CR>", { desc = "Quit without saving" })
 vks("n", "<leader>bn", ":bnext <CR>", { desc = "Tab goes to next Buffer" })
 vks("n", "<leader>bp", ":bprevious <CR>", { desc = "Tab goes to next Buffer" })
-vks("n", "<leader>pv", ":.25Lex<CR>", { desc = "Toggle netrw tree view" })
+vks("n", "<leader>pv", ":Ex<CR>", { desc = "Toggle netrw tree view" })
+
+-- Togglers
+vks('n', '<leader>wr', ":set wrap! <CR>", { desc = 'activates word wrap setting'})
 
 -- Visual Keymaps
 vks("v","<leader>rh", "\"hy:%s/<C-r>h//g<left><left>") -- In Visual mode find and replace selected section
