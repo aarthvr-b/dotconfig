@@ -42,10 +42,6 @@ zinit cdreplay -q
 
 bindkey '^j' history-search-backward
 bindkey '^k' history-search-forward
-bindkey '^w' autosuggest-execute
-bindkey '^e' autosuggest-accept
-bindkey '^u' autosuggest-toggle
-bindkey '^L' vi-forward-word
 
 # =========================
 # 📜 History
