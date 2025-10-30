@@ -78,6 +78,8 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ls='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -la -h'  # lists everything with dir first
 alias c='clear'
+alias python='python3'
+alias pip='pip3'
 
 # eval "$(starship init zsh)" # commented cause we're using powerlevel10k now
 eval "$(zoxide init --cmd cd zsh)"
