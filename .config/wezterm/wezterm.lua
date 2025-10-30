@@ -27,7 +27,7 @@ config.max_fps = 120
 config.prefer_egl = true
 
 -- Keymaps
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
+config.leader = { key = "o", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
     {
         key = "|",
