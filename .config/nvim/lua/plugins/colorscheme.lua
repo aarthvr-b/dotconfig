@@ -1,12 +1,13 @@
 -- COLORSCHEME plugin
 
 return {
-    "https://github.com/sainnhe/gruvbox-material",
+    "vague-theme/vague.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-        vim.g.gruvbox_material_enable_italic = true
-        vim.g.gruvbox_material_enable_bold = true
-        vim.cmd.colorscheme('gruvbox-material')
+        opts = {
+            transparent = true
+        }
+        vim.cmd("colorscheme vague")
     end,
 }
