@@ -1,19 +1,26 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local theme = require("lua/vague")
 
-config.color_scheme = 'Gruvbox Dark (Gogh)'
+-- Colorscheme
+config.colors = theme.colors()
+
+-- Colorscheme
+config.colors = theme.colors()
+config.window_frame = theme.window_frame()
 
 -- Font settings
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("IosevkaTerm Nerd Font Mono")
 config.enable_tab_bar = false
 config.font_size = 16
 config.line_height = 1
-config.text_background_opacity = 1.0
+config.text_background_opacity = 1
 
 -- Appearence
--- config.window_decorations = "RESIZE"
-config.window_background_opacity = 1.0
+config.window_decorations = "RESIZE"
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 30
+
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
     left = .5,
