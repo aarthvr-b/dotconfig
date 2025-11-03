@@ -6,8 +6,8 @@ echo "🔗 Creating symlinks for dotconfig..."
 
 mkdir -p ~/.config
 
-ln -sf ~/dotconfig/nvim ~/.config/nvim
-ln -sf ~/dotconfig/wezterm ~/.config/wezterm
-ln -sf ~/dotconfig/zsh ~/.config/zsh
+ln -sf ~/dotconfig/.config/nvim ~/.config/nvim
+ln -sf ~/dotconfig/.config/wezterm ~/.config/wezterm
+ln -sf ~/dotconfig/.config/zsh ~/.config/zsh
 
 echo "✅ All symlinks created successfully!"
