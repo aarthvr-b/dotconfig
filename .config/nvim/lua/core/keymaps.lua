@@ -12,6 +12,7 @@ vks("n", "<leader>pv", ":Ex<CR>", { desc = "Toggle netrw tree view" })
 
 -- Togglers
 vks('n', '<leader>wr', ":set wrap! <CR>", { desc = 'activates word wrap setting'})
+vks('n', '<leader>h', ":nohlsearch<CR>", { desc = "Clear search highlights"})
 
 -- Visual Keymaps
 vks("v","<leader>rh", "\"hy:%s/<C-r>h//g<left><left>") -- In Visual mode find and replace selected section
