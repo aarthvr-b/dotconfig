@@ -1,13 +1,16 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-local theme = require("lua/vague")
 
--- Colorscheme
-config.colors = theme.colors()
+-- local theme = require("lua/vague")
 
--- Colorscheme
-config.colors = theme.colors()
-config.window_frame = theme.window_frame()
+-- -- Colorscheme
+-- config.colors = theme.colors()
+--
+-- -- Colorscheme
+-- config.colors = theme.colors()
+-- config.window_frame = theme.window_frame()
+
+config.color_scheme = 'Black Metal (Gorgoroth) (base16)'
 
 -- Font settings
 config.font = wezterm.font("IosevkaTerm Nerd Font Mono")
