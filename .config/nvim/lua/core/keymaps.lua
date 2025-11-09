@@ -10,6 +10,9 @@ vks("n", "<leader>bn", ":bnext <CR>", { desc = "Tab goes to next Buffer" })
 vks("n", "<leader>bp", ":bprevious <CR>", { desc = "Tab goes to next Buffer" })
 vks("n", "<leader>pv", ":Ex<CR>", { desc = "Toggle netrw tree view" })
 
+vks('n', "<C-u>", "<C-u>zz", { desc = 'move up and center cursor'})
+vks('n', "<C-d>", "<C-d>zz", { desc = 'move down and center cursor'})
+
 -- Togglers
 vks('n', '<leader>wr', ":set wrap! <CR>", { desc = 'activates word wrap setting'})
 vks('n', '<leader>h', ":nohlsearch<CR>", { desc = "Clear search highlights"})
