@@ -21,6 +21,7 @@ o.autoindent = true
 -- Visual settings
 o.termguicolors = true
 o.signcolumn = 'yes'
+o.colorcolumn = '100'
 o.winborder = 'rounded'
 
 -- Behavior settings
@@ -28,4 +29,3 @@ o.selection = "exclusive"
 o.mouse = 'a'
 o.clipboard:append("unnamedplus")
 o.spelllang = "en"
-
