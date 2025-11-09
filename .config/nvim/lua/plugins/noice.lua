@@ -21,6 +21,19 @@ return {
     },
     dependencies = {
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
-    }
+        {
+            "rcarriga/nvim-notify",
+            config = function()
+                local notify = require("notify")
+                notify.setup({
+                    stages = "fade_in_slide_out",
+                    timeout = 2500,
+                    background_colour = "#1e1e2e",
+                    render = "compact",
+                    top_down = false,
+                })
+                vim.notify = notify
+            end,
+        },
+    },
 }
