@@ -18,6 +18,7 @@ All configs are stored here (`~/dotconfig`) and linked to their expected locatio
 
 ## Repo structure
 
+```bash
 📂 dotconfig/
 ├── 📁 .config/
 │   ├── 📁 ghostty/       # 👻 Ghostty terminal configuration
@@ -30,6 +31,7 @@ All configs are stored here (`~/dotconfig`) and linked to their expected locatio
 ├── .zshrc               # 🐚 Zsh run commands
 ├── ⚙️ install.sh        # Cross-platform installer for macOS/Linux/WSL
 └── 📘 README.md         # Project overview & setup instructions
+```
 
 ---
 
