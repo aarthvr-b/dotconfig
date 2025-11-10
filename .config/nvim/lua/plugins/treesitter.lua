@@ -11,6 +11,11 @@ return {
             "lua",
             "python",
             "vim",
+            "json",
+            "yaml",
+            "bash",
+            "html",
+            "css",
         }
     }
 }
