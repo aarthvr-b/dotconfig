@@ -1,5 +1,5 @@
 return {
-    cmd = { "lua-language-server " },
+    cmd = { "lua-language-server" },
     filetypes = { "lua" },
     root_markers = {
         ".luarc.json",
@@ -10,6 +10,17 @@ return {
         "selene.toml",
         "selene.yml",
         ".git",
+    },
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- get the ls to recognize the `vim` global
+                globals = { 'vim' },
+            }
+        },
     },
     single_file_support = true,
     log_level = vim.lsp.protocol.MessageType.Warning,
