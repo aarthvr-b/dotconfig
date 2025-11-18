@@ -8,8 +8,8 @@ o.wrap = false
 o.scrolloff = 10
 o.sidescrolloff = 10
 
-o.list = true
-o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+o.list = false
+-- o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Indentation
 o.tabstop = 4
