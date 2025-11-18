@@ -8,17 +8,17 @@ return {
     config = function()
         -- List of available variants
         local schemes = {
-            "base16-black-metal-bathory",
-            "base16-black-metal-burzum",
-            "base16-black-metal-dark-funeral",
+            -- "base16-black-metal-bathory",
+            -- "base16-black-metal-burzum",
+            -- "base16-black-metal-dark-funeral",
             "base16-black-metal-gorgoroth",
-            "base16-black-metal-immortal",
-            "base16-black-metal-khold",
-            "base16-black-metal-marduk",
-            "base16-black-metal-mayhem",
-            "base16-black-metal-nile",
-            "base16-black-metal-venom",
-            "base16-black-metal",
+            -- "base16-black-metal-immortal",
+            -- "base16-black-metal-khold",
+            -- "base16-black-metal-marduk",
+            -- "base16-black-metal-mayhem",
+            -- "base16-black-metal-nile",
+            -- "base16-black-metal-venom",
+            -- "base16-black-metal",
         }
 
         local index = 1
