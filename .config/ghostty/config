@@ -1,12 +1,13 @@
 # Ghostty config
 
 custom-shader = shaders/cursor_smear.glsl
-theme = "Black Metal (Gorgoroth)"
+theme = "Black Metal (Immortal)"
 background-opacity = 0.95
 
-font-family = "IosevkaTerm Nerd Font Mono"
+font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 16
 font-style = "Regular"
 alpha-blending = linear
 
 cursor-style = block
+# keybind = shift+enter=text:\x1b\r
