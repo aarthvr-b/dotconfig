@@ -20,8 +20,8 @@ o.autoindent = true
 
 -- Visual settings
 o.termguicolors = true
-o.signcolumn = "yes"
-o.colorcolumn = "80"
+-- o.signcolumn = "yes"
+-- o.colorcolumn = "80"
 o.winborder = "rounded"
 
 -- Behavior settings
