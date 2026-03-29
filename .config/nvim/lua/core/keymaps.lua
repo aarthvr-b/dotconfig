@@ -8,7 +8,7 @@ vks("n", "<leader>ww", ":write<CR>", { desc = "Write document" })
 vks("n", "<leader>qq", ":q!<CR>", { desc = "Quit without saving" })
 vks("n", "<leader>bn", ":bnext <CR>", { desc = "Tab goes to next Buffer" })
 vks("n", "<leader>bp", ":bprevious <CR>", { desc = "Go to previous Buffer" })
-vks("n", "<leader>pv", ":Ex<CR>", { desc = "Open file tree." })
+-- vks("n", "<leader>pv", ":Ex<CR>", { desc = "Open file tree." })
 
 vks("n", "<C-u>", "<C-u>zz", { desc = "move up and center cursor" })
 vks("n", "<C-d>", "<C-d>zz", { desc = "move down and center cursor" })
@@ -30,3 +30,6 @@ vks({ "n", "x" }, "<leader>PP", '"+P', { desc = "Paste from system Clipboard bef
 -- indenting
 vks("v", "<", "<gv", { silent = true, noremap = true, desc = "Indent selected to the left" })
 vks("v", ">", ">gv", { silent = true, noremap = true, desc = "Indent selection to the right" })
+
+-- treesitter
+vks("n", "<leader>pv", "<Cmd>Neotree filesystem reveal toggle left<CR>", { desc = "Toggle Neo-Tree" })
