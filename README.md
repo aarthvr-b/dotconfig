@@ -5,14 +5,15 @@ My personal configuration files managed in a version-controlled repository.
 This repo contains my core developer environment setup:
 
 - **Neovim** (`~/.config/nvim`)
-- **WezTerm** (`~/.config/wezterm`)
-- **Zsh** (`~/.zshrc` and `~/.config/zsh`)
 - **Ghostty** (`~/.config/ghostty`)
 - **Tmux** (`~/.config/tmux`)
+- **WezTerm** (`~/.config/wezterm`)
+- **Zsh** (`~/.zshrc`)
+- **Zk** (`~/.config/zk`)
 - **Starship** (`~/.config/starship.toml`)
-- **Brew** (`BrewFile` for macOS packages)
+- **Brew** (`~/.config/BrewFile` for macOS packages)
 
-All configs are stored here (`~/dotconfig`) and linked to their expected locations using a simple install script.
+All configs are stored here (`~/dotconfig`) and linked into `$HOME` with GNU Stow.
 
 ---
 
@@ -21,15 +22,16 @@ All configs are stored here (`~/dotconfig`) and linked to their expected locatio
 ```bash
 📂 dotconfig/
 ├── 📁 .config/
+│   ├── BrewFile         # 🍺 Homebrew packages
 │   ├── 📁 ghostty/       # 👻 Ghostty terminal configuration
 │   ├── 📁 nvim/          # 📝 Neovim configuration
+│   ├── starship.toml     # 🚀 Starship prompt configuration
 │   ├── 📁 tmux/          # 🖥️ Tmux configuration
 │   ├── 📁 wezterm/       # 💻 WezTerm terminal configuration
-│   ├── 📁 zsh/           # 🐚 Zsh shell configuration
-│   └── starship.toml     # 🚀 Starship prompt configuration
-├── BrewFile             # 🍺 Homebrew packages
+│   └── 📁 zk/            # 🗒️ Zk configuration
+├── .luarc.json          # Lua tooling configuration
 ├── .zshrc               # 🐚 Zsh run commands
-├── ⚙️ install.sh        # Cross-platform installer for macOS/Linux/WSL
+├── ⚙️ install.sh        # Convenience wrapper around GNU Stow
 └── 📘 README.md         # Project overview & setup instructions
 ```
 
@@ -37,31 +39,45 @@ All configs are stored here (`~/dotconfig`) and linked to their expected locatio
 
 ## Installation
 
-Clone the repo and run the shell installer
+Clone the repo and use the Stow wrapper for the first install:
 
 ```bash
 git clone git@github.com:aarthvr-b/dotconfig.git ~/dotconfig
+~/dotconfig/install.sh
+```
+
+That wrapper:
+
+- Backs up conflicting real files or directories to `*.pre-stow.<timestamp>.bak`
+- Runs GNU Stow against the repo root
+- Leaves existing symlinks in place and refreshes them with `--restow`
+
+For repeat runs, the equivalent raw Stow command is:
+
+```bash
 cd ~/dotconfig
-chmod +x install.sh
-./install.sh
+stow --target="$HOME" --restow --ignore='^(README\.md|install\.sh|\.gitignore|\.luarc\.json)$' .
 ```
 
 This will:
 
 - Ensure `~/.config` exists
-- Create sym links from `~/dotconfig/.config/{ghostty,nvim,tmux,wezterm,zsh}` → `~/.config/{ghostty,nvim,tmux,wezterm,zsh}`
-- Create sym link for `~/dotconfig/.config/starship.toml` → `~/.config/starship.toml`
-- Create sym link for `~/dotconfig/.zshrc` → `~/.zshrc`
-- Safely overwrite existing symlinks if necessary
+- Create symlinks from `~/dotconfig/.config/{BrewFile,ghostty,nvim,starship.toml,tmux,wezterm,zk}` → `~/.config/{BrewFile,ghostty,nvim,starship.toml,tmux,wezterm,zk}`
+- Create a symlink from `~/dotconfig/.config/starship.toml` → `~/.config/starship.toml`
+- Create a symlink from `~/dotconfig/.zshrc` → `~/.zshrc`
+- Back up conflicting non-symlink targets before linking them
+- Refresh existing symlinks if necessary
 
 ## Notes
 
-- If you later add new folders (e.g. alacritty, git), just update the install scripts with one more ln -s or New-Item command.
-- The installer is idempotent — running it again will simply refresh the links.
-- On new machines, you can bootstrap your dev environment in seconds:
+- Stow is the only supported install path for this repo.
+- `install.sh` is the safest first-run path because it handles pre-existing real files and directories.
+- Running the command again is safe; `--restow` will refresh the links.
+- On a new machine, bootstrap with:
 
 ```bash
-git clone https://github.com/<your-username>/dotconfig.git ~/dotconfig && ~/dotconfig/install.sh
+git clone git@github.com:aarthvr-b/dotconfig.git ~/dotconfig
+~/dotconfig/install.sh
 ```
 
 - BrewFile can be used with `brew bundle install` to install listed packages.
@@ -72,4 +88,3 @@ git clone https://github.com/<your-username>/dotconfig.git ~/dotconfig && ~/dotc
 
 This repo is shared for educational and personal purposes.
 Feel free to adapt it to your own workflow!.
-
