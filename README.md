@@ -39,7 +39,7 @@ All configs are stored here (`~/dotconfig`) and linked into `$HOME` with GNU Sto
 
 ## Installation
 
-Clone the repo and use the Stow wrapper for the first install:
+Clone the repo and use the [stow](https://www.gnu.org/software/stow/) wrapper for the first install:
 
 ```bash
 git clone git@github.com:aarthvr-b/dotconfig.git ~/dotconfig
