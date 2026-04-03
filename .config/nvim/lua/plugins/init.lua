@@ -1,0 +1,5 @@
+require("plugins.completion")
+require("plugins.navigation")
+require("plugins.ui")
+require("plugins.git")
+require("plugins.lsp")
