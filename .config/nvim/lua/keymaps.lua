@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "      -- space for leader
 vim.g.maplocalleader = " " -- space for local leader
@@ -18,7 +17,6 @@ map("n", "<leader>ps", function() require('fff').live_grep() end, { desc = 'FFFu
 map("n", "<leader>pv", "<Cmd>Oil<CR>", { desc = "Open [P]arent directory [V]iew" })
 
 -- format current buffer
-map("n", "<leader>ft", "<Cmd>lua vim.lsp.buf.format()<CR>", { desc = "[F]orma[T] current buffer" })
 
 
 
@@ -28,3 +26,25 @@ map("n", "<C-j>", "<cmd><C-U>TmuxNavigateDown<CR>", { silent = true })
 map("n", "<C-k>", "<cmd><C-U>TmuxNavigateUp<CR>", { silent = true })
 map("n", "<C-l>", "<cmd><C-U>TmuxNavigateRight<CR>", { silent = true })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = function(ev)
+        vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+        local opts = { buffer = ev.buf }
+
+        map("n", "gd", vim.lsp.buf.definition, opts, { desc = "[G]o to [D]efinition" })
+        map("n", "<leader>hh", vim.lsp.buf.hover, opts, { desc = '[H]over on a code' })
+        map("n", "gi", vim.lsp.buf.implementation, opts, { desc = '[G]o to [I]mplementation' })
+        map("n", "<leader>D", vim.lsp.buf.type_definition, opts, { desc = 'Type [D]efinition' })
+        map("n", "<leader>rn", vim.lsp.buf.rename, opts, { desc = '[R]ename' })
+        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts, { desc = '[C]ode [A]ction' })
+        map("n", "gr", vim.lsp.buf.references, opts, { desc = '[Go] to [R]eferences' })
+        map("n", "<leader>ft", function() vim.lsp.buf.format({ async = true }) end, opts,
+            { desc = "[F]orma[T] current buffer" })
+
+        -- Open the diagnostic under the cursor in a float window
+        map("n", '<leader>d', function()
+            vim.diagnostic.open_float({ border = "rounded", })
+        end, opts, { desc = 'Open diagnostic under cursor in float window' })
+    end,
+})
