@@ -33,10 +33,8 @@ vo.concealcursor = ""
 vo.synmaxcol = 300 -- syntax highlighting max limit
 
 local undodir = vim.fn.expand("~/.vim/undodir")
-if
-    vim.fn.isdirectory(undodir) == 0
-then
-    vim.fn.mkdir(undodir,"p")
+if vim.fn.isdirectory(undodir) == 0 then
+	vim.fn.mkdir(undodir, "p")
 end
 
 vim.opt.backup = false -- do not create a backup file
@@ -62,29 +60,29 @@ vim.opt.modifiable = true -- allow buffer modifications
 vim.opt.encoding = "utf-8" -- set encoding
 
 vim.diagnostic.config({
-    virtual_text = { prefix = "●", spacing = 4 },
-    -- alternatively show diag only for the current cursor line
-    -- virtual_lines = {
-    --     current_line = true,
-    -- },
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-    float = {
-        border = "rounded",
-        source = true,
-        syle = "minimal"
-    },
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = "",
-            [vim.diagnostic.severity.WARN] = "",
-            [vim.diagnostic.severity.HINT] = "󰠠",
-            [vim.diagnostic.severity.INFO] = "",
-        },
-        numhl = {
-            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-            [vim.diagnostic.severity.WARN] = "WarningMsg",
-        }
-    }
+	virtual_text = { prefix = "●", spacing = 4 },
+	-- alternatively show diag only for the current cursor line
+	-- virtual_lines = {
+	--     current_line = true,
+	-- },
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = true,
+		syle = "minimal",
+	},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "󰠠",
+			[vim.diagnostic.severity.INFO] = "",
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+			[vim.diagnostic.severity.WARN] = "WarningMsg",
+		},
+	},
 })

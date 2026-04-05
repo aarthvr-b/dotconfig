@@ -1,4 +1,5 @@
 require("plugins.completion")
+require("plugins.conform")
 require("plugins.mini")
 require("plugins.treesitter")
 require("plugins.navigation")

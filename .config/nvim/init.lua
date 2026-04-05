@@ -6,7 +6,6 @@ vim.cmd.colorscheme("habamax")
 -- ===========
 require("options")
 
-
 -- ============
 -- KEYMAPS
 -- ===========
