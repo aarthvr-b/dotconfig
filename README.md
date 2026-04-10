@@ -49,6 +49,7 @@ git clone git@github.com:aarthvr-b/dotconfig.git ~/dotconfig
 That wrapper:
 
 - Backs up conflicting real files or directories to `*.pre-stow.<timestamp>.bak`
+- Refuses to run if the repo contains transient artifacts such as `*.bak` or `*.log`
 - Runs GNU Stow against the repo root
 - Leaves existing symlinks in place and refreshes them with `--restow`
 
@@ -73,6 +74,7 @@ This will:
 - Stow is the only supported install path for this repo.
 - `install.sh` is the safest first-run path because it handles pre-existing real files and directories.
 - Running the command again is safe; `--restow` will refresh the links.
+- If `install.sh` aborts because it found transient files, remove those repo-local artifacts before re-running it.
 - On a new machine, bootstrap with:
 
 ```bash
