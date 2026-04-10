@@ -3,9 +3,11 @@
 # ==============================
 
 # Enable Powerlevel10k instant prompt.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+#
+
 
 
 # ==============================
@@ -13,23 +15,27 @@ fi
 # ==============================
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -d "$ZINIT_HOME" ]; then
-    mkdir -p "$(dirname $ZINIT_HOME)"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+if [ -d "$ZINIT_HOME" ]; then
+    source "${ZINIT_HOME}/zinit.zsh"
+else
+    if [[ -o interactive ]]; then
+        print -u2 "zinit is not installed; skipping zsh plugin setup."
+    fi
 fi
-source "${ZINIT_HOME}/zinit.zsh"
 
 # ==============================
 # 🔌 Plugins
 # ==============================
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-zinit snippet OMZP::git
-zinit snippet OMZP::command-not-found
+if [ -d "$ZINIT_HOME" ]; then
+    zinit ice depth=1
+    zinit light zsh-users/zsh-syntax-highlighting
+    zinit light zsh-users/zsh-completions
+    zinit light zsh-users/zsh-autosuggestions
+    zinit light Aloxaf/fzf-tab
+    zinit snippet OMZP::git
+    zinit snippet OMZP::command-not-found
+fi
 
 
 # =========================
@@ -37,7 +43,9 @@ zinit snippet OMZP::command-not-found
 # =========================
 
 autoload -U compinit && compinit
-zinit cdreplay -q
+if [ -d "$ZINIT_HOME" ]; then
+    zinit cdreplay -q
+fi
 
 
 bindkey '^j' history-search-backward
@@ -76,14 +84,27 @@ export EDITOR="nvim"
 # =========================
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ls='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -la -h'  # lists everything with dir first
+alias tree='eza -T'
+# alias ls='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -la -h'  # lists everything with dir first
+alias ls='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -l'
+alias gl='git log --oneline'
+alias gs='git status --short'
+alias lz='lazygit'
 alias c='clear'
 alias python='python3'
 alias pip='pip3'
+alias cat='bat'
 
-# eval "$(starship init zsh)" # commented cause we're using powerlevel10k now
+eval "$(starship init zsh)" # commented cause we're using powerlevel10k now
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
+
+# Auto-start rmux (only if not already inside it)
+if [[ -o interactive ]] && command -v tmux >/dev/null 2>&1; then
+    if [ -z "$TMUX" ]; then
+        exec tmux
+    fi
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
