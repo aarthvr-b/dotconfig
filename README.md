@@ -90,7 +90,11 @@ git clone git@github.com:aarthvr-b/dotconfig.git ~/dotconfig
 ~/dotconfig/install.sh
 ```
 
-- BrewFile can be used with `brew bundle install` to install listed packages.
+- BrewFile is a curated baseline for my macOS setup, not a raw snapshot of every package installed on this machine.
+- VS Code extensions are intentionally not tracked in BrewFile.
+- Use `brew bundle install --file="$HOME/.config/BrewFile"` to install the baseline packages.
+- To refresh BrewFile, export a temporary snapshot with `brew bundle dump --force --describe --file=/tmp/BrewFile.snapshot`, compare it with `diff -u .config/BrewFile /tmp/BrewFile.snapshot`, then update the repo intentionally.
+- Validate changes with `brew bundle check --file=.config/BrewFile`.
 
 ---
 
