@@ -5,15 +5,20 @@ My personal configuration files managed in a version-controlled repository.
 This repo contains my core developer environment setup:
 
 - **Neovim** (`~/.config/nvim`)
-- **Ghostty** (`~/.config/ghostty`)
+- **Ghostty** (`~/.config/ghostty`) - active terminal config
 - **Tmux** (`~/.config/tmux`)
-- **WezTerm** (`~/.config/wezterm`)
+- **WezTerm** (`~/.config/wezterm`) - archived, kept for reference
 - **Zsh** (`~/.zshrc`)
 - **Zk** (`~/.config/zk`)
 - **Starship** (`~/.config/starship.toml`)
 - **Brew** (`~/.config/BrewFile` for macOS packages)
 
 All configs are stored here (`~/dotconfig`) and linked into `$HOME` with GNU Stow.
+
+## Status
+
+Ghostty is the terminal I actively use and maintain in this repo.
+The WezTerm config is archived and kept only as a legacy reference for anyone curious about my previous setup.
 
 ---
 
@@ -23,11 +28,11 @@ All configs are stored here (`~/dotconfig`) and linked into `$HOME` with GNU Sto
 📂 dotconfig/
 ├── 📁 .config/
 │   ├── BrewFile         # 🍺 Homebrew packages
-│   ├── 📁 ghostty/       # 👻 Ghostty terminal configuration
+│   ├── 📁 ghostty/       # 👻 Active terminal configuration
 │   ├── 📁 nvim/          # 📝 Neovim configuration
 │   ├── starship.toml     # 🚀 Starship prompt configuration
 │   ├── 📁 tmux/          # 🖥️ Tmux configuration
-│   ├── 📁 wezterm/       # 💻 WezTerm terminal configuration
+│   ├── 📁 wezterm/       # 💻 Archived terminal configuration
 │   └── 📁 zk/            # 🗒️ Zk configuration
 ├── .luarc.json          # Lua tooling configuration
 ├── .zshrc               # 🐚 Zsh run commands
@@ -68,6 +73,9 @@ This will:
 - Create a symlink from `~/dotconfig/.zshrc` → `~/.zshrc`
 - Back up conflicting non-symlink targets before linking them
 - Refresh existing symlinks if necessary
+
+Ghostty is the recommended terminal config for anyone adopting this repo.
+WezTerm is still linked for backward compatibility, but it is no longer maintained.
 
 ## Notes
 
