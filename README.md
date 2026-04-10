@@ -7,7 +7,7 @@ This repo contains my core developer environment setup:
 - **Neovim** (`~/.config/nvim`)
 - **Ghostty** (`~/.config/ghostty`) - active terminal config
 - **Tmux** (`~/.config/tmux`)
-- **WezTerm** (`~/.config/wezterm`) - archived, kept for reference
+- ~~**WezTerm** (`~/.config/wezterm`)~~ - archived, kept for reference
 - **Zsh** (`~/.zshrc`)
 - **Zk** (`~/.config/zk`)
 - **Starship** (`~/.config/starship.toml`)
@@ -32,7 +32,7 @@ The WezTerm config is archived and kept only as a legacy reference for anyone cu
 │   ├── 📁 nvim/          # 📝 Neovim configuration
 │   ├── starship.toml     # 🚀 Starship prompt configuration
 │   ├── 📁 tmux/          # 🖥️ Tmux configuration
-│   ├── 📁 wezterm/       # 💻 Archived terminal configuration
+│   ├── 📁 ~~wezterm/~~   # 💻 Archived terminal configuration
 │   └── 📁 zk/            # 🗒️ Zk configuration
 ├── .luarc.json          # Lua tooling configuration
 ├── .zshrc               # 🐚 Zsh run commands
