@@ -17,5 +17,6 @@ require("nvim-treesitter").setup({
 		"bash",
 		"html",
 		"css",
+		"c_sharp",
 	},
 })
