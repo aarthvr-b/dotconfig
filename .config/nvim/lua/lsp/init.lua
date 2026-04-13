@@ -1,21 +1,34 @@
-local servers = { "lua_ls", "pyright", "omnisharp", "ruff" }
-local ruff_config = vim.fn.expand("~/dotconfig/.config/ruff/ruff.toml")
+local servers = { "lua_ls", "pyright", "ruff" }
+local ruff_config = vim.fs.normalize(vim.fs.joinpath(vim.fn.stdpath("config"), "..", "ruff", "ruff.toml"))
 
-for _, server in ipairs(servers) do
-	vim.lsp.enable(server)
+local function resolve_omnisharp_cmd()
+	local bundled = vim.fn.expand("~/.local/share/omnisharp/OmniSharp")
+	if vim.fn.executable(bundled) == 1 then
+		return bundled
+	end
+
+	for _, candidate in ipairs({ "OmniSharp", "omnisharp" }) do
+		if vim.fn.executable(candidate) == 1 then
+			return candidate
+		end
+	end
 end
 
-vim.lsp.config("omnisharp", {
-	cmd = { vim.fn.expand("~/.local/share/omnisharp/OmniSharp"), "--languageserver" },
-	settings = {
-		FormattingOptions = {
-			EnableEditorConfigSupport = true,
+local omnisharp_cmd = resolve_omnisharp_cmd()
+if omnisharp_cmd then
+	table.insert(servers, "omnisharp")
+	vim.lsp.config("omnisharp", {
+		cmd = { omnisharp_cmd, "--languageserver" },
+		settings = {
+			FormattingOptions = {
+				EnableEditorConfigSupport = true,
+			},
+			RoslynExtensionsOptions = {
+				EnableAnalyzersSupport = true,
+			},
 		},
-		RoslynExtensionsOptions = {
-			EnableAnalyzersSupport = true,
-		},
-	},
-})
+	})
+end
 
 vim.lsp.config("lua_ls", {
 	settings = {
@@ -47,3 +60,7 @@ vim.lsp.config("ruff", {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 })
+
+for _, server in ipairs(servers) do
+	vim.lsp.enable(server)
+end
