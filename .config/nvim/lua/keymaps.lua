@@ -11,14 +11,16 @@ map("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 
 -- fff fuzzy finder
 map("n", "<leader>pf", function()
-	require("fff").find_files()
+	_G.LoadFff().find_files()
 end, { desc = "FFFind files" })
 map("n", "<leader>ps", function()
-	require("fff").live_grep()
+	_G.LoadFff().live_grep()
 end, { desc = "FFFuzzy grep" })
 
 -- oil
-map("n", "<leader>pv", "<Cmd>Oil<CR>", { desc = "Open [P]arent directory [V]iew" })
+map("n", "<leader>pv", function()
+	_G.LoadOil().open()
+end, { desc = "Open [P]arent directory [V]iew" })
 
 -- format current buffer
 
