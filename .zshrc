@@ -2,14 +2,6 @@
 # 🧩 arthur's zsh configuration
 # ==============================
 
-# Enable Powerlevel10k instant prompt.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-#
-
-
-
 # ==============================
 # ⚙️Zinit setup 
 # ==============================
@@ -95,7 +87,7 @@ alias python='python3'
 alias pip='pip3'
 alias cat='bat'
 
-eval "$(starship init zsh)" # commented cause we're using powerlevel10k now
+eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
 
@@ -105,6 +97,3 @@ if [[ -o interactive ]] && command -v tmux >/dev/null 2>&1; then
         exec tmux
     fi
 fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
