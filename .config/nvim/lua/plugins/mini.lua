@@ -3,7 +3,7 @@ vim.pack.add({
 })
 
 require("mini.pairs").setup()
-require("mini.notify").setup()
+-- require("mini.notify").setup()
 require("mini.surround").setup({
 	mappings = {
 		add = "sa", -- Add surrounding in Normal and Visual modes
