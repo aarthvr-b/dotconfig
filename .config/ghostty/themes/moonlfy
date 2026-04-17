@@ -1,0 +1,30 @@
+# moonlfy — Ghostty theme inspired by Moonfly for Neovim
+
+background = #080808
+foreground = #c6c6c6
+
+cursor-color = #80a0ff
+cursor-text = #080808
+
+selection-background = #323437
+selection-foreground = #e4e4e4
+
+# ANSI 0-7
+palette = 0=#323437
+palette = 1=#ff5d5d
+palette = 2=#8cc85f
+palette = 3=#e3c78a
+palette = 4=#80a0ff
+palette = 5=#cf87e8
+palette = 6=#79dac8
+palette = 7=#c6c6c6
+
+# ANSI 8-15
+palette = 8=#949494
+palette = 9=#ff5189
+palette = 10=#36c692
+palette = 11=#c6c684
+palette = 12=#74b2ff
+palette = 13=#ae81ff
+palette = 14=#85dc85
+palette = 15=#e4e4e4
