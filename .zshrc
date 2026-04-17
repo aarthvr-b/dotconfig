@@ -87,6 +87,12 @@ alias python='python3'
 alias pip='pip3'
 alias cat='bat'
 
+# Force Ghostty back to the primary screen if a session gets stuck in alt-screen.
+ghostty_primary_screen() {
+    printf '\033[?1049l\033[?47l'
+}
+alias fix-scroll='ghostty_primary_screen'
+
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
