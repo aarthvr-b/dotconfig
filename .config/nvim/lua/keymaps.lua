@@ -8,6 +8,8 @@ map("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
 map("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
+map("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" })
+map("n", "<leader>bs", ":buffers<CR>", { desc = "Show current buffers." })
 
 -- fff fuzzy finder
 map("n", "<leader>pf", function()
