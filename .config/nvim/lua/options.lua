@@ -86,3 +86,13 @@ vim.diagnostic.config({
 		},
 	},
 })
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	group = vim.api.nvim_create_augroup("TerminalCleanup", { clear = true }),
+	callback = function()
+		if #vim.api.nvim_list_uis() > 0 then
+			io.write("\27[0m\27[2J\27[H")
+			io.flush()
+		end
+	end,
+})
