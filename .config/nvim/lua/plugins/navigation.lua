@@ -4,7 +4,7 @@ vim.pack.add({
 
 vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
-}, { load = false })
+})
 
 vim.g.fff = {
 	lazy_sync = true,
@@ -16,9 +16,7 @@ vim.g.fff = {
 
 local loaded = {
 	fff = false,
-	oil = false,
 }
-local oil_setup_done = false
 
 local function load_plugin(name)
 	if loaded[name] then
@@ -34,20 +32,12 @@ function _G.LoadFff()
 	return require("fff")
 end
 
-function _G.LoadOil()
-	load_plugin("oil.nvim")
-	local oil = require("oil")
-	if not oil_setup_done then
-		oil.setup({
-			view_options = {
-				show_hidden = true,
-			},
-			keymaps = {
-				["<C-h>"] = false,
-				["<C-l>"] = false,
-			},
-		})
-		oil_setup_done = true
-	end
-	return oil
-end
+require("oil").setup({
+	view_options = {
+		show_hidden = true,
+	},
+	keymaps = {
+		["<C-h>"] = false,
+		["<C-l>"] = false,
+	},
+})

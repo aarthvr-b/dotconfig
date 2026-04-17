@@ -20,9 +20,7 @@ map("n", "<leader>ps", function()
 end, { desc = "FFFuzzy grep" })
 
 -- oil
-map("n", "<leader>pv", function()
-	_G.LoadOil().open()
-end, { desc = "Open [P]arent directory [V]iew" })
+map("n", "<leader>pv", "<Cmd>Oil<CR>", { desc = "Open [P]arent directory [V]iew" })
 
 -- format current buffer
 
