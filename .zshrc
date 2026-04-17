@@ -96,10 +96,3 @@ alias fix-scroll='ghostty_primary_screen'
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
-
-# Auto-start rmux (only if not already inside it)
-if [[ -o interactive ]] && command -v tmux >/dev/null 2>&1; then
-    if [ -z "$TMUX" ]; then
-        exec tmux
-    fi
-fi

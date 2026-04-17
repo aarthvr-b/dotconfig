@@ -26,12 +26,6 @@ end, { desc = "Open [P]arent directory [V]iew" })
 
 -- format current buffer
 
--- split navigation
-map("n", "<C-h>", "<cmd><C-U>TmuxNavigateLeft<CR>", { silent = true })
-map("n", "<C-j>", "<cmd><C-U>TmuxNavigateDown<CR>", { silent = true })
-map("n", "<C-k>", "<cmd><C-U>TmuxNavigateUp<CR>", { silent = true })
-map("n", "<C-l>", "<cmd><C-U>TmuxNavigateRight<CR>", { silent = true })
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)

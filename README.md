@@ -6,7 +6,6 @@ This repo contains my core developer environment setup:
 
 - **Neovim** (`~/.config/nvim`)
 - **Ghostty** (`~/.config/ghostty`) - active terminal config
-- **Tmux** (`~/.config/tmux`)
 - ~~**WezTerm** (`~/.config/wezterm`)~~ - archived, kept for reference
 - **Zsh** (`~/.zshrc`)
 - **Zk** (`~/.config/zk`)
@@ -31,7 +30,6 @@ The WezTerm config is archived and kept only as a legacy reference for anyone cu
 │   ├── 📁 ghostty/       # 👻 Active terminal configuration
 │   ├── 📁 nvim/          # 📝 Neovim configuration
 │   ├── starship.toml     # 🚀 Starship prompt configuration
-│   ├── 📁 tmux/          # 🖥️ Tmux configuration
 │   ├── 📁 ~~wezterm/~~   # 💻 Archived terminal configuration
 │   └── 📁 zk/            # 🗒️ Zk configuration
 ├── .luarc.json          # Lua tooling configuration
@@ -68,7 +66,7 @@ stow --target="$HOME" --restow --ignore='^(README\.md|install\.sh|\.gitignore|\.
 This will:
 
 - Ensure `~/.config` exists
-- Create symlinks from `~/dotconfig/.config/{BrewFile,ghostty,nvim,starship.toml,tmux,wezterm,zk}` → `~/.config/{BrewFile,ghostty,nvim,starship.toml,tmux,wezterm,zk}`
+- Create symlinks from `~/dotconfig/.config/{BrewFile,ghostty,nvim,starship.toml,wezterm,zk}` → `~/.config/{BrewFile,ghostty,nvim,starship.toml,wezterm,zk}`
 - Create a symlink from `~/dotconfig/.config/starship.toml` → `~/.config/starship.toml`
 - Create a symlink from `~/dotconfig/.zshrc` → `~/.zshrc`
 - Back up conflicting non-symlink targets before linking them

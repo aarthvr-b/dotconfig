@@ -13,3 +13,12 @@ cursor-style = block
 cursor-color = cell-foreground
 cursor-text = cell-background
 mouse-scroll-multiplier = 1
+
+# Tmux-like prefix sequences for split management without running tmux.
+keybind = ctrl+a>shift+quote=new_split:down
+keybind = ctrl+a>shift+digit_5=new_split:right
+keybind = ctrl+a>ctrl+h=goto_split:left
+keybind = ctrl+a>ctrl+j=goto_split:down
+keybind = ctrl+a>ctrl+k=goto_split:up
+keybind = ctrl+a>ctrl+l=goto_split:right
+keybind = ctrl+a>ctrl+a=text:\x01
