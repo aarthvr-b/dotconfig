@@ -1,3 +1,4 @@
+require("plugins.colorscheme")
 require("plugins.completion")
 require("plugins.conform")
 require("plugins.mini")

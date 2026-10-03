@@ -3,6 +3,7 @@ local vo = vim.opt
 vo.number = true -- line number
 vo.relativenumber = true -- relative line numbers
 vo.cursorline = true -- highlight current line
+vo.termguicolors = true -- 24-bit colors
 vo.wrap = false -- do now wrap lines
 vo.scrolloff = 10 -- keep 10 lines above/below cursor
 vo.sidescrolloff = 10 -- keep 10 horizonally
