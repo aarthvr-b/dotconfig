@@ -38,8 +38,16 @@ backup_target() {
 }
 
 mkdir -p "$HOME/.config"
+# Real directories so stow links individual entries instead of folding ~/.claude
+# into the repo, where Claude Code would write its runtime state.
+mkdir -p "$HOME/.claude/skills"
 check_for_transient_files
 
+backup_target "$HOME/.claude/AGENTS.md"
+backup_target "$HOME/.claude/CLAUDE.md"
+backup_target "$HOME/.claude/settings.json"
+backup_target "$HOME/.claude/skills/find-skills"
+backup_target "$HOME/.claude/skills/no-ai-slop"
 backup_target "$HOME/.config/BrewFile"
 backup_target "$HOME/.config/ghostty"
 backup_target "$HOME/.config/nvim"

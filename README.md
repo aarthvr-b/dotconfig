@@ -11,6 +11,7 @@ This repo contains my core developer environment setup:
 - **Zk** (`~/.config/zk`)
 - **Starship** (`~/.config/starship.toml`)
 - **Brew** (`~/.config/BrewFile` for macOS packages)
+- **Claude Code** (`~/.claude/{settings.json,AGENTS.md,CLAUDE.md,skills/}`) - portable config only, runtime state stays out of the repo
 
 All configs are stored here (`~/dotconfig`) and linked into `$HOME` with GNU Stow.
 
@@ -25,6 +26,11 @@ The WezTerm config is archived and kept only as a legacy reference for anyone cu
 
 ```bash
 📂 dotconfig/
+├── 📁 .claude/
+│   ├── AGENTS.md        # 🤖 Cross-repository agent instructions
+│   ├── CLAUDE.md        # Imports AGENTS.md for Claude Code
+│   ├── settings.json    # Claude Code user settings
+│   └── 📁 skills/        # Personal skills
 ├── 📁 .config/
 │   ├── BrewFile         # 🍺 Homebrew packages
 │   ├── 📁 ghostty/       # 👻 Active terminal configuration
