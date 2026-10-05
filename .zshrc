@@ -68,7 +68,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # =========================
 # 🌎 Environment
 # =========================
-export PATH="/opt/homebrew/bin:$HOME/bin:$PATH"
+export PATH="$HOME/go/bin:/opt/homebrew/bin:$HOME/bin:$PATH"
 export EDITOR="nvim"
 
 # =========================
@@ -86,6 +86,7 @@ alias c='clear'
 alias python='python3'
 alias pip='pip3'
 alias cat='bat'
+alias cc='claude'
 
 # Force Ghostty back to the primary screen if a session gets stuck in alt-screen.
 ghostty_primary_screen() {
