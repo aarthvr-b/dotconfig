@@ -18,3 +18,7 @@
 !.claude/CLAUDE.md
 !.claude/skills/
 .claude/skills/synced/
+
+# Local tool state (not portable)
+.config/uv/
+.config/git/

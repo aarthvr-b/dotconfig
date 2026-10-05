@@ -1,0 +1,14 @@
+# Global editorconfig — applies when projects lack root = true
+# Projects with their own root = true take full precedence.
+root = false
+
+[*.cs]
+# xUnit v3 forbids ConfigureAwait(false) on awaited calls in test methods.
+# CA2007 is the rule that auto-adds it; suppress to prevent code-fix insertion.
+dotnet_diagnostic.CA2007.severity = none
+
+# Require braces on if/else/while/etc. CSharpier 1.x adds them automatically,
+# but keep the rule active so Roslyn flags any case it misses.
+csharp_prefer_braces = true:warning
+dotnet_diagnostic.SA1503.severity = warning
+dotnet_diagnostic.IDE0011.severity = warning

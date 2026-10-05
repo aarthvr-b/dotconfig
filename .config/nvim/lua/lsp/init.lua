@@ -86,8 +86,17 @@ local function resolve_omnisharp_cmd()
 	end
 end
 
+-- Prefer csharp-ls (dotnet tool) when installed; fall back to OmniSharp.
+local csharp_ls_cmd = vim.fn.expand("~/.dotnet/tools/csharp-ls")
 local omnisharp_cmd = resolve_omnisharp_cmd()
-if omnisharp_cmd then
+if vim.fn.executable(csharp_ls_cmd) == 1 then
+	table.insert(servers, "csharp_ls")
+	vim.lsp.config("csharp_ls", {
+		cmd = { csharp_ls_cmd },
+		filetypes = { "cs" },
+		root_markers = { "*.sln", "*.csproj", ".git" },
+	})
+elseif omnisharp_cmd then
 	table.insert(servers, "omnisharp")
 	vim.lsp.config("omnisharp", {
 		cmd = { omnisharp_cmd, "--languageserver" },

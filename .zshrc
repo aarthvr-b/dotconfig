@@ -2,6 +2,9 @@
 # 🧩 arthur's zsh configuration
 # ==============================
 
+# Machine-local secrets (untracked)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
 # ==============================
 # ⚙️Zinit setup 
 # ==============================
@@ -68,7 +71,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # =========================
 # 🌎 Environment
 # =========================
-export PATH="$HOME/go/bin:/opt/homebrew/bin:$HOME/bin:$PATH"
+export PATH="$HOME/go/bin:/opt/homebrew/bin:$HOME/.local/bin:$HOME/bin:$PATH"
 export EDITOR="nvim"
 
 # =========================
@@ -87,6 +90,8 @@ alias python='python3'
 alias pip='pip3'
 alias cat='bat'
 alias cc='claude'
+alias gpus='git push'
+alias gpul='git pull'
 
 # Force Ghostty back to the primary screen if a session gets stuck in alt-screen.
 ghostty_primary_screen() {
@@ -95,5 +100,23 @@ ghostty_primary_screen() {
 alias fix-scroll='ghostty_primary_screen'
 
 eval "$(starship init zsh)"
+export _ZO_DOCTOR=0
 eval "$(zoxide init --cmd cd zsh)"
+ci() { __zoxide_zi "$@"; }
 eval "$(fzf --zsh)"
+
+# =========================
+# 🟢 Optional tooling (only where installed)
+# =========================
+export BUN_INSTALL="$HOME/.bun"
+[ -d "$BUN_INSTALL/bin" ] && export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+for pg in /opt/homebrew/opt/postgresql@16/bin /opt/homebrew/opt/postgresql@17/bin; do
+    [ -d "$pg" ] && export PATH="$pg:$PATH"
+done
+[ -d /opt/homebrew/opt/dotnet/libexec ] && export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"

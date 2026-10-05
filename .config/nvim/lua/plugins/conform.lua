@@ -1,8 +1,23 @@
+-- dotnet format is slow (spins up MSBuild), so C# formats async after save
+local use_dotnet_format = vim.fn.executable("dotnet") == 1
+
 return {
 	"stevearc/conform.nvim",
-	event = "BufWritePre",
+	event = { "BufWritePre", "BufWritePost" },
 	cmd = "ConformInfo",
 	opts = {
+		formatters = {
+			dotnet_format = {
+				command = "dotnet",
+				args = function(_, ctx)
+					return { "format", "--include", ctx.filename, "--no-restore" }
+				end,
+				cwd = function(self, ctx)
+					return require("conform.util").root_file({ "*.sln", "*.csproj" })(self, ctx)
+				end,
+				stdin = false,
+			},
+		},
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "ruff_format" },
@@ -10,11 +25,18 @@ return {
 			typescript = { "prettierd", "prettier", stop_after_first = true },
 			javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-			cs = { "csharpier" },
+			cs = { use_dotnet_format and "dotnet_format" or "csharpier" },
 		},
-		format_on_save = {
-			timeout_ms = 1000,
-			lsp_format = "fallback",
-		},
+		format_on_save = function(bufnr)
+			if use_dotnet_format and vim.bo[bufnr].filetype == "cs" then
+				return
+			end
+			return { timeout_ms = 1000, lsp_format = "fallback" }
+		end,
+		format_after_save = function(bufnr)
+			if use_dotnet_format and vim.bo[bufnr].filetype == "cs" then
+				return { lsp_format = "never" }
+			end
+		end,
 	},
 }
