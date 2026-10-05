@@ -1,4 +1,4 @@
-local servers = { "lua_ls", "pyright", "ruff" }
+local servers = { "lua_ls", "pyright", "ruff", "ts_ls", "eslint" }
 
 local function real_config_dir()
 	local config_dir = vim.fn.stdpath("config")
@@ -8,9 +8,33 @@ end
 local ruff_fallback_config = vim.fs.normalize(vim.fs.joinpath(real_config_dir(), "..", "ruff", "ruff.toml"))
 local ruff_root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" }
 local ruff_config_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml" }
+local js_root_markers = {
+	"tsconfig.json",
+	"jsconfig.json",
+	"package.json",
+	".git",
+}
+local eslint_root_markers = {
+	"eslint.config.js",
+	"eslint.config.cjs",
+	"eslint.config.mjs",
+	"eslint.config.ts",
+	".eslintrc",
+	".eslintrc.js",
+	".eslintrc.cjs",
+	".eslintrc.json",
+	".eslintrc.yaml",
+	".eslintrc.yml",
+	"package.json",
+	".git",
+}
 
 local function python_root_dir(bufnr)
 	return vim.fs.root(bufnr, ruff_root_markers) or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+end
+
+local function js_root_dir(bufnr, markers)
+	return vim.fs.root(bufnr, markers) or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
 end
 
 local function has_local_ruff_config(root_dir)
@@ -123,6 +147,25 @@ vim.lsp.config("ruff", {
 			},
 		}
 	end,
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
+})
+
+vim.lsp.config("ts_ls", {
+	root_dir = function(bufnr, on_dir)
+		on_dir(js_root_dir(bufnr, js_root_markers))
+	end,
+})
+
+vim.lsp.config("eslint", {
+	root_dir = function(bufnr, on_dir)
+		on_dir(js_root_dir(bufnr, eslint_root_markers))
+	end,
+	settings = {
+		workingDirectory = { mode = "auto" },
+	},
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false

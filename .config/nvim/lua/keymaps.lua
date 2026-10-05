@@ -11,13 +11,23 @@ map("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 map("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" })
 map("n", "<leader>bs", ":buffers<CR>", { desc = "Show current buffers." })
 
--- fff fuzzy finder
+-- Snacks
 map("n", "<leader>pf", function()
-	_G.LoadFff().find_files()
-end, { desc = "FFFind files" })
+	Snacks.picker.files()
+end, { desc = "Find files" })
 map("n", "<leader>ps", function()
-	_G.LoadFff().live_grep()
-end, { desc = "FFFuzzy grep" })
+	Snacks.picker.grep()
+end, { desc = "Search with grep" })
+map("n", "<leader>pb", function()
+	Snacks.picker.buffers()
+end, { desc = "Buffers" })
+map("n", "gd", function()
+	Snacks.picker.lsp_definitions()
+end, { desc = "Go to Definition" })
+
+map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Show Neogit UI" })
+
+vim.cmd([[ xnoremap <expr> p 'pgv"' .v:register.'y' ]])
 
 -- oil
 map("n", "<leader>pv", "<Cmd>Oil<CR>", { desc = "Open [P]arent directory [V]iew" })
@@ -30,7 +40,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 		local opts = { buffer = ev.buf }
 
-		map("n", "gd", vim.lsp.buf.definition, opts, { desc = "[G]o to [D]efinition" })
+		-- map("n", "gd", vim.lsp.buf.definition, opts, { desc = "[G]o to [D]efinition" })
 		map("n", "<leader>hh", vim.lsp.buf.hover, opts, { desc = "[H]over on a code" })
 		map("n", "gi", vim.lsp.buf.implementation, opts, { desc = "[G]o to [I]mplementation" })
 		map("n", "<leader>D", vim.lsp.buf.type_definition, opts, { desc = "Type [D]efinition" })
