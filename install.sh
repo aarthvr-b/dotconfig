@@ -38,13 +38,23 @@ backup_target() {
 }
 
 mkdir -p "$HOME/.config"
+# Real directories so stow links individual entries instead of folding ~/.claude
+# and ~/.agents into the repo, where agents would write their runtime state.
+# The skills directories are the exception: they are linked whole, so that
+# `npx skills add -g` writes new skills straight into the repo.
+mkdir -p "$HOME/.claude" "$HOME/.agents"
 check_for_transient_files
 
+backup_target "$HOME/.agents/.skill-lock.json"
+backup_target "$HOME/.agents/skills"
+backup_target "$HOME/.claude/AGENTS.md"
+backup_target "$HOME/.claude/CLAUDE.md"
+backup_target "$HOME/.claude/settings.json"
+backup_target "$HOME/.claude/skills"
 backup_target "$HOME/.config/BrewFile"
 backup_target "$HOME/.config/ghostty"
 backup_target "$HOME/.config/nvim"
 backup_target "$HOME/.config/starship.toml"
-backup_target "$HOME/.config/tmux"
 backup_target "$HOME/.config/wezterm"
 backup_target "$HOME/.config/zk"
 backup_target "$HOME/.zshrc"

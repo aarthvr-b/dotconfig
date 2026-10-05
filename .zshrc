@@ -2,14 +2,6 @@
 # 🧩 arthur's zsh configuration
 # ==============================
 
-# Enable Powerlevel10k instant prompt.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-#
-
-
-
 # ==============================
 # ⚙️Zinit setup 
 # ==============================
@@ -76,7 +68,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # =========================
 # 🌎 Environment
 # =========================
-export PATH="/opt/homebrew/bin:$HOME/bin:$PATH"
+export PATH="$HOME/go/bin:/opt/homebrew/bin:$HOME/bin:$PATH"
 export EDITOR="nvim"
 
 # =========================
@@ -94,17 +86,14 @@ alias c='clear'
 alias python='python3'
 alias pip='pip3'
 alias cat='bat'
+alias cc='claude'
 
-eval "$(starship init zsh)" # commented cause we're using powerlevel10k now
+# Force Ghostty back to the primary screen if a session gets stuck in alt-screen.
+ghostty_primary_screen() {
+    printf '\033[?1049l\033[?47l'
+}
+alias fix-scroll='ghostty_primary_screen'
+
+eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
-
-# Auto-start rmux (only if not already inside it)
-if [[ -o interactive ]] && command -v tmux >/dev/null 2>&1; then
-    if [ -z "$TMUX" ]; then
-        exec tmux
-    fi
-fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

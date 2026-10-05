@@ -1,16 +1,29 @@
-vim.pack.add({
-	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-})
-
-require("gitsigns").setup({
-	signs = {
-		add = { text = "\u{2590}" },
-		change = { text = "\u{2590}" },
-		delete = { text = "\u{2590}" },
-		topdelete = { text = "\u{25e6}" },
-		changedelete = { text = "\u{25cf}" },
-		untracked = { text = "\u{25cb}" },
+return {
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "BufReadPre",
+		opts = {
+			signs = {
+				add = { text = "\u{2590}" },
+				change = { text = "\u{2590}" },
+				delete = { text = "\u{2590}" },
+				topdelete = { text = "\u{25e6}" },
+				changedelete = { text = "\u{25cf}" },
+				untracked = { text = "\u{25cb}" },
+			},
+			signcolumn = true,
+			current_line_blame = false,
+		},
 	},
-	signcolumn = true,
-	current_line_blame = false,
-})
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"sindrets/diffview.nvim", -- optional
+			"folke/snacks.nvim", -- optional
+		},
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+		},
+	},
+}

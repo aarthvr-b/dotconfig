@@ -1,22 +1,8 @@
-vim.opt.termguicolors = true
-vim.cmd.colorscheme("habamax")
+-- Leaders must be set before any mappings or lazy.nvim are loaded
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- ============
--- OPTIONS
--- ===========
 require("options")
-
--- ============
--- KEYMAPS
--- ===========
 require("keymaps")
-
--- ============
--- PLUGINS
--- ===========
-require("plugins")
-
--- ============
--- LSPs
--- ===========
+require("lazy_init")
 require("lsp")

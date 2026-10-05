@@ -1,22 +1,20 @@
-vim.pack.add({
-	{ src = "https://github.com/stevearc/conform.nvim" },
-})
-
-require("conform").setup({
-	formatters_by_ft = {
-		lua = { "stylua" },
-		python = { "ruff_format" },
-		javascript = { "prettier" },
-		typescript = { "prettier" },
-		javascriptreact = { "prettier" },
-		typescriptreact = { "prettier" },
-		cs = { "csharpier" },
+return {
+	"stevearc/conform.nvim",
+	event = "BufWritePre",
+	cmd = "ConformInfo",
+	opts = {
+		formatters_by_ft = {
+			lua = { "stylua" },
+			python = { "ruff_format" },
+			javascript = { "prettierd", "prettier", stop_after_first = true },
+			typescript = { "prettierd", "prettier", stop_after_first = true },
+			javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+			cs = { "csharpier" },
+		},
+		format_on_save = {
+			timeout_ms = 1000,
+			lsp_format = "fallback",
+		},
 	},
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		require("conform").format({ bufnr = args.buf })
-	end,
-})
+}

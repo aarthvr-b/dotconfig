@@ -6,12 +6,13 @@ This repo contains my core developer environment setup:
 
 - **Neovim** (`~/.config/nvim`)
 - **Ghostty** (`~/.config/ghostty`) - active terminal config
-- **Tmux** (`~/.config/tmux`)
 - ~~**WezTerm** (`~/.config/wezterm`)~~ - archived, kept for reference
 - **Zsh** (`~/.zshrc`)
 - **Zk** (`~/.config/zk`)
 - **Starship** (`~/.config/starship.toml`)
 - **Brew** (`~/.config/BrewFile` for macOS packages)
+- **Claude Code** (`~/.claude/{settings.json,AGENTS.md,CLAUDE.md,skills/}`) - portable config only, runtime state stays out of the repo
+- **Agent skills** (`~/.agents/{skills/,.skill-lock.json}`) - skills installed with `npx skills add -g`, shared across agents
 
 All configs are stored here (`~/dotconfig`) and linked into `$HOME` with GNU Stow.
 
@@ -26,12 +27,19 @@ The WezTerm config is archived and kept only as a legacy reference for anyone cu
 
 ```bash
 📂 dotconfig/
+├── 📁 .agents/
+│   ├── .skill-lock.json # Source and version of each installed skill
+│   └── 📁 skills/        # Installed skills, shared across agents
+├── 📁 .claude/
+│   ├── AGENTS.md        # 🤖 Cross-repository agent instructions
+│   ├── CLAUDE.md        # Symlink to AGENTS.md for Claude Code
+│   ├── settings.json    # Claude Code user settings
+│   └── 📁 skills/        # Links into .agents/skills for Claude Code
 ├── 📁 .config/
 │   ├── BrewFile         # 🍺 Homebrew packages
 │   ├── 📁 ghostty/       # 👻 Active terminal configuration
 │   ├── 📁 nvim/          # 📝 Neovim configuration
 │   ├── starship.toml     # 🚀 Starship prompt configuration
-│   ├── 📁 tmux/          # 🖥️ Tmux configuration
 │   ├── 📁 ~~wezterm/~~   # 💻 Archived terminal configuration
 │   └── 📁 zk/            # 🗒️ Zk configuration
 ├── .luarc.json          # Lua tooling configuration
@@ -68,7 +76,7 @@ stow --target="$HOME" --restow --ignore='^(README\.md|install\.sh|\.gitignore|\.
 This will:
 
 - Ensure `~/.config` exists
-- Create symlinks from `~/dotconfig/.config/{BrewFile,ghostty,nvim,starship.toml,tmux,wezterm,zk}` → `~/.config/{BrewFile,ghostty,nvim,starship.toml,tmux,wezterm,zk}`
+- Create symlinks from `~/dotconfig/.config/{BrewFile,ghostty,nvim,starship.toml,wezterm,zk}` → `~/.config/{BrewFile,ghostty,nvim,starship.toml,wezterm,zk}`
 - Create a symlink from `~/dotconfig/.config/starship.toml` → `~/.config/starship.toml`
 - Create a symlink from `~/dotconfig/.zshrc` → `~/.zshrc`
 - Back up conflicting non-symlink targets before linking them
@@ -90,6 +98,7 @@ git clone git@github.com:aarthvr-b/dotconfig.git ~/dotconfig
 ~/dotconfig/install.sh
 ```
 
+- `~/.claude/skills` and `~/.agents/skills` are symlinks to the repo directories, so `npx skills add <source> -g` (and `update` / `remove`) writes straight into the repo. Review the diff with `git status` and commit it.
 - BrewFile is a curated baseline for my macOS setup, not a raw snapshot of every package installed on this machine.
 - VS Code extensions are intentionally not tracked in BrewFile.
 - Use `brew bundle install --file="$HOME/.config/BrewFile"` to install the baseline packages.
