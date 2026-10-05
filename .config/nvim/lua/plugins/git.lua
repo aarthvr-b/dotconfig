@@ -1,7 +1,7 @@
 return {
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufWinEnter",
+		event = "BufReadPre",
 		opts = {
 			signs = {
 				add = { text = "\u{2590}" },
@@ -17,11 +17,13 @@ return {
 	},
 	{
 		"NeogitOrg/neogit",
-		lazy = true,
 		dependencies = {
 			"sindrets/diffview.nvim", -- optional
 			"folke/snacks.nvim", -- optional
 		},
 		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+		},
 	},
 }

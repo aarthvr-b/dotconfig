@@ -102,16 +102,6 @@ if omnisharp_cmd then
 	})
 end
 
-vim.lsp.config("lua_ls", {
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim" },
-			},
-		},
-	},
-})
-
 vim.lsp.config("pyright", {
 	handlers = {
 		["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
@@ -175,3 +165,49 @@ vim.lsp.config("eslint", {
 for _, server in ipairs(servers) do
 	vim.lsp.enable(server)
 end
+
+vim.diagnostic.config({
+	virtual_text = { prefix = "●", spacing = 4 },
+	-- alternatively show diag only for the current cursor line
+	-- virtual_lines = {
+	--     current_line = true,
+	-- },
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		source = true,
+		style = "minimal",
+	},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "󰠠",
+			[vim.diagnostic.severity.INFO] = "",
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+			[vim.diagnostic.severity.WARN] = "WarningMsg",
+		},
+	},
+})
+
+-- Neovim already provides: K (hover), grn (rename), gra (code action), grr (references),
+-- gri (implementation), grt (type definition), gO (symbols), <C-w>d (diagnostic float).
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+	callback = function(ev)
+		local function map(mode, lhs, rhs, desc)
+			vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
+		end
+
+		map("n", "gd", function()
+			Snacks.picker.lsp_definitions()
+		end, "[G]o to [D]efinition")
+		map("n", "grr", function()
+			Snacks.picker.lsp_references()
+		end, "[G]o to [R]eferences")
+		map("n", "<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
+	end,
+})

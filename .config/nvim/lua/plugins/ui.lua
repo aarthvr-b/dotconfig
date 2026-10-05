@@ -3,12 +3,14 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			component_separators = { left = "", right = "│" },
+			options = {
+				component_separators = { left = "", right = "│" },
+			},
 			sections = {
 				lualine_c = {
 					{
 						"filename",
-						path = 3,
+						path = 1,
 						file_status = true,
 						newfile_status = false,
 					},
@@ -18,17 +20,25 @@ return {
 	},
 
 	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+
+	{
 		"catgoose/nvim-colorizer.lua",
 		event = "BufReadPre",
 		opts = {
-			css = true,
-			mode = "background",
-			names = false,
-			RGB = true,
-			RRGGBB = true,
-			RRGGBBAA = true,
-			rgb_fn = true,
-			hsl_fn = true,
+			user_default_options = {
+				css = true,
+				mode = "background",
+				names = false,
+				RGB = true,
+				RRGGBB = true,
+				RRGGBBAA = true,
+				rgb_fn = true,
+				hsl_fn = true,
+			},
 		},
 	},
 }
