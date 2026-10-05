@@ -7,6 +7,6 @@
 *~
 .config/nvim/.nvimlog
 
-.config/nvim/lazy-lock.json
 .config/nvim/nvim-pack-lock.json
+.ruff_cache/
 .config/tmux/plugins/
