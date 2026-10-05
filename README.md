@@ -28,7 +28,7 @@ The WezTerm config is archived and kept only as a legacy reference for anyone cu
 📂 dotconfig/
 ├── 📁 .claude/
 │   ├── AGENTS.md        # 🤖 Cross-repository agent instructions
-│   ├── CLAUDE.md        # Imports AGENTS.md for Claude Code
+│   ├── CLAUDE.md        # Symlink to AGENTS.md for Claude Code
 │   ├── settings.json    # Claude Code user settings
 │   └── 📁 skills/        # Personal skills
 ├── 📁 .config/
