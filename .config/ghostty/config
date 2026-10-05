@@ -1,18 +1,21 @@
 # Ghostty config
 
 custom-shader = shaders/cursor_smear.glsl
-theme = Moonfly
+theme = Rose Pine
 
-font-family = "IosevkaTerm Nerd Font Mono"
-font-size = 16
+font-family = "Hack Nerd Font Mono Regular"
+font-size = 15
 font-style = "Regular"
 alpha-blending = linear
 split-divider-color = #524f67
 
+background-opacity = 0.8
+background-blur = 50
+# macos-titlebar-style = hidden
+
 cursor-style = block
 cursor-color = cell-foreground
 cursor-text = cell-background
-mouse-scroll-multiplier = 1
 
 # Tmux-like prefix sequences for split management without running tmux.
 keybind = ctrl+a>shift+quote=new_split:down
