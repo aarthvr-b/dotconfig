@@ -1,0 +1,16 @@
+onboarding = false
+
+[keys]
+
+# Switch directly to workspace 1–9: Ctrl+b, then Shift+1..9 (!, @, #, etc.)
+# (Note: Ctrl+b then 1..9 continues to switch tabs)
+switch_workspace = "prefix+shift+1..9"
+
+# Previous / Next workspace:
+# Press Ctrl+b, then [ or ] (also supports tmux session style: Ctrl+b, then ( or ))
+previous_workspace = ["prefix+[", "prefix+("]
+next_workspace = ["prefix+]", "prefix+)"]
+
+new_tab = "prefix+n"
+split_horizotal = "prefix+"""
+split_vertical = "prefix+%"
