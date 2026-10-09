@@ -27,16 +27,5 @@ return {
 			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 			cs = { use_dotnet_format and "dotnet_format" or "csharpier" },
 		},
-		format_on_save = function(bufnr)
-			if use_dotnet_format and vim.bo[bufnr].filetype == "cs" then
-				return
-			end
-			return { timeout_ms = 1000, lsp_format = "fallback" }
-		end,
-		format_after_save = function(bufnr)
-			if use_dotnet_format and vim.bo[bufnr].filetype == "cs" then
-				return { lsp_format = "never" }
-			end
-		end,
 	},
 }

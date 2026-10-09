@@ -7,9 +7,9 @@ vo.wrap = false -- do not wrap lines
 vo.scrolloff = 10 -- keep 10 lines above/below cursor
 vo.sidescrolloff = 10 -- keep 10 horizontally
 
-vo.tabstop = 2 -- tab width
-vo.shiftwidth = 2 -- indent width
-vo.softtabstop = 2 -- soft tab stop not tabs on tab/backspace
+vo.tabstop = 4 -- tab width
+vo.shiftwidth = 4 -- indent width
+vo.softtabstop = 4 -- soft tab stop not tabs on tab/backspace
 vo.expandtab = true -- use spaces instead of tabs
 vo.smartindent = true -- smart auto-indent
 
