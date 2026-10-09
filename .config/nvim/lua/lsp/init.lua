@@ -73,6 +73,13 @@ local function filter_pyright_diagnostics(bufnr, diagnostics)
 	end, diagnostics)
 end
 
+-- ts_ls already reports JS/TS syntax errors, so ESLint's parse errors would show up twice
+local function filter_eslint_parse_errors(diagnostics)
+	return vim.tbl_filter(function(diagnostic)
+		return not vim.startswith(diagnostic.message, "Parsing error:")
+	end, diagnostics)
+end
+
 local function resolve_omnisharp_cmd()
 	local bundled = vim.fn.expand("~/.local/share/omnisharp/OmniSharp")
 	if vim.fn.executable(bundled) == 1 then
@@ -165,6 +172,16 @@ vim.lsp.config("eslint", {
 	settings = {
 		workingDirectory = { mode = "auto" },
 	},
+	handlers = {
+		["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+			if result and result.diagnostics then
+				result = vim.deepcopy(result)
+				result.diagnostics = filter_eslint_parse_errors(result.diagnostics)
+			end
+
+			return vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+		end,
+	},
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
@@ -175,12 +192,46 @@ for _, server in ipairs(servers) do
 	vim.lsp.enable(server)
 end
 
+-- virtual_lines does not wrap, so long messages are split into lines here
+local error_wrap_width = 80
+
+local function wrap_message(message, width)
+	local lines = {}
+	for paragraph in (message .. "\n"):gmatch("(.-)\n") do
+		local line = ""
+		for word in paragraph:gmatch("%S+") do
+			if line == "" then
+				line = word
+			elseif #line + 1 + #word <= width then
+				line = line .. " " .. word
+			else
+				table.insert(lines, line)
+				line = word
+			end
+		end
+		table.insert(lines, line)
+	end
+	return table.concat(lines, "\n")
+end
+
 vim.diagnostic.config({
-	virtual_text = { prefix = "●", spacing = 4 },
-	-- alternatively show diag only for the current cursor line
-	-- virtual_lines = {
-	--     current_line = true,
-	-- },
+	-- Errors are long, so they get full multi-line messages below the code.
+	-- Warnings and below stay on one line at the end of the code.
+	virtual_lines = {
+		severity = vim.diagnostic.severity.ERROR,
+		format = function(diagnostic)
+			return wrap_message(diagnostic.message, error_wrap_width)
+		end,
+	},
+	virtual_text = {
+		prefix = "●",
+		spacing = 4,
+		severity = {
+			vim.diagnostic.severity.WARN,
+			vim.diagnostic.severity.INFO,
+			vim.diagnostic.severity.HINT,
+		},
+	},
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
