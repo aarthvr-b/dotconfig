@@ -14,3 +14,10 @@ Cross-repository behavior for coding agents. Loaded by Claude Code via `~/.claud
 - Apply that same high standatd to engineering excellence: lint, test failures, and test flakiness;
     if you see one, even if it is not caused by what you are working onright now, still get it fixed.
 - **For file modifications, always prefer Edit/Write tools over Bash.** Never create or modify files via Bash commands (heredocs, redirects, `sed -i`, `tee`, or scripts that write files). Use Edit or Write so diffs are visible in the conversation and you can review changes. Exception: temporary/throwaway files in scratchpad or `/tmp` that won't be part of the codebase. That way I can follow your code changes and review them as they come.
+
+## Commit messages
+- Keep them short: the subject line, plus at most a few lines of body saying *why*. No preamble paragraph restating what the diff shows.
+
+## PR bodies
+- Whenever you write or update a PR body - including inside `/mattpocock-skills:implement` or any other workflow - invoke the `pr` skill (mattpocock-skills) and write the body its way.
+- Keep the rest of the calling workflow as-is, and keep any sections the repo requires.
